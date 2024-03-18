@@ -1,10 +1,10 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react'
+import { ChangeEvent,  FormEvent, useState } from 'react'
 
 interface AddCategoryProps {
-  setCategories: Dispatch<SetStateAction<string[]>>;
+  onNewCategory: (category: string) => void
 }
 
-export const AddCategory = ( { setCategories }: AddCategoryProps) => {
+export const AddCategory = ( { onNewCategory }: AddCategoryProps) => {
 
   const [ inputValue, setInputValue ] = useState('');
 
@@ -17,7 +17,7 @@ export const AddCategory = ( { setCategories }: AddCategoryProps) => {
 
     if (inputValue.trim().length <= 1) return;
 
-    setCategories( (categories: string[]) => [ inputValue, ...categories ] );
+    onNewCategory( inputValue.trim() );
     setInputValue('');
   }
 

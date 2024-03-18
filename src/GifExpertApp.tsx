@@ -4,7 +4,13 @@ import { AddCategory } from './components/AddCategory';
 
 export default function GifExpertApp() {
 
-  const [ categories, setCategories ] = useState<string[]>([ 'Spiderman', 'Youngla' ]);
+  const [ categories, setCategories ] = useState([ 'Spiderman', 'Youngla' ]);
+
+  const onAddCategory = (category: string) => {
+    if ( categories.includes(category) ) return;
+
+    setCategories([ category, ...categories ]);
+  }
 
   return (
     <>
@@ -12,7 +18,10 @@ export default function GifExpertApp() {
       <div>GifExpertApp</div>
 
       {/* Input */}
-      <AddCategory setCategories={ setCategories } />
+      <AddCategory 
+        // onAddCategory={ setCategories } 
+        onNewCategory={ (value) => onAddCategory(value) }
+        />
 
       {/* Gif list */}
       <ol>
