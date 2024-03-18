@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
+import { AddCategory } from './components/AddCategory';
+
 export default function GifExpertApp() {
 
-  const [ categories, setCategories ] = useState([ 'Spiderman', 'Youngla' ]);
+  const [ categories, setCategories ] = useState<string[]>([ 'Spiderman', 'Youngla' ]);
 
   return (
     <>
@@ -10,6 +12,7 @@ export default function GifExpertApp() {
       <div>GifExpertApp</div>
 
       {/* Input */}
+      <AddCategory setCategories={ setCategories } />
 
       {/* Gif list */}
       <ol>
