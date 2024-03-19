@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import PropTypes from 'prop-types';
 
-import { GifResponse, getGifs } from '../helpers/getGifs';
 import { GifItem } from './GifItem';
+import { useFetchGifs } from '../hooks/useFetchGifs';
 
 type GifGridProps = {
   category: string;
@@ -10,16 +10,7 @@ type GifGridProps = {
 
 export const GifGrid: FC<GifGridProps> = ({ category }) => {
 
-  const [images, setImages] = useState<GifResponse[]>([]);
-
-  const getImages = async () => {
-    const newImages = await getGifs( category );
-    setImages( newImages );
-  }
-
-  useEffect(() => {
-    getImages()
-  })
+  const { images } = useFetchGifs( category );
   
   return (
     <>
@@ -27,7 +18,6 @@ export const GifGrid: FC<GifGridProps> = ({ category }) => {
       <div className='card-grid'>
         {
           images.map( image => (
-            // <GifItem key={ id } title={title}></GifItem>
             <GifItem key={ image.id } { ...image } />
           ))
         }
