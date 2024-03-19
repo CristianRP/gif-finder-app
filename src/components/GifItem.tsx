@@ -1,13 +1,10 @@
 import { GifResponse } from '../helpers/getGifs'
 
-interface Props extends Omit<GifResponse, "id" | "url"> {
-  id?: string;
-  url?: string;
-  key: string;
-}
-
-export const GifItem = ({ id, title }: Props) => {
+export const GifItem = ({ title, url }: GifResponse) => {
   return (
-    <li key={ id }>{ title }</li>
+    <div className="card--item">
+      <img src={ url } alt={ title } />
+      <p>{ title }</p>
+    </div>
   )
 }

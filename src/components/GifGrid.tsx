@@ -24,7 +24,7 @@ export const GifGrid: FC<GifGridProps> = ({ category }) => {
   return (
     <>
       <h3>{ category }</h3>
-      <div className='cardGrid'>
+      <div className='card-grid'>
         {
           images.map( image => (
             // <GifItem key={ id } title={title}></GifItem>
