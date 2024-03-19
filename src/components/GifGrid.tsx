@@ -1,22 +1,38 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
+import { GifResponse, getGifs } from '../helpers/getGifs';
+import { GifItem } from './GifItem';
 
 type GifGridProps = {
   category: string;
 }
 
-const gifs = [1, 12, 3, 4];
-
 export const GifGrid: FC<GifGridProps> = ({ category }) => {
+
+  const [images, setImages] = useState<GifResponse[]>([]);
+
+  const getImages = async () => {
+    const newImages = await getGifs( category );
+    setImages( newImages );
+  }
+
+  useEffect(() => {
+    getImages()
+  })
+  
   return (
-    <div key={ category }>
+    <>
       <h3>{ category }</h3>
-      {
-        gifs.map(e => (
-          <h1>{ e }</h1>
-        ))
-      }
-    </div>
+      <div className='cardGrid'>
+        {
+          images.map( image => (
+            // <GifItem key={ id } title={title}></GifItem>
+            <GifItem key={ image.id } { ...image } />
+          ))
+        }
+      </div>
+    </>
   )
 }
 
